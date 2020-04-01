@@ -54,7 +54,7 @@ e3.x = 366
 function isCollided(box1, box2) {
 var plleft = box2.x;
     var plright = box2.x + (box2.size);
-    var pltop = box1.y;
+    var pltop = box2.y;
     var plbottom = box2.y + (box2.size);
     var enleft = box1.x;
     var enright = box1.x + (box1.size);
