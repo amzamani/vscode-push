@@ -1,117 +1,117 @@
-let paintbox = document.getElementById('paintbox')
-let context = paintbox.getContext('2d')
+var myGameArea;
+var myGamePiece;
+var myObstacles = [];
 
-let gameOn = true
-
-let playerSpeed = 5
-
-class Box {
-  constructor(size, color) {
-    this.size = size
-    this.color = color
-    this.x = 0
-    this.y = 0
-  }
+function startGame() {
+    myGameArea = new gamearea();
+    myGamePiece = new component(30, 30, "red", 10, 75);
+    myGameArea.start();
 }
 
-class Player extends Box {
-  constructor() {
-    super(50, 'blue')
-    this.x = 0
-    this.y = 225
-    this.speed = 0
-  }
-  move() {
-    this.x += this.speed
-  }
-}
-
-class Enemy extends Box {
-  constructor(speed) {
-    super(50, 'red')
-    this.speed = speed
-  }
-
-  move() {
-    this.y += this.speed
-    if (this.y + this.size > 500) {
-      this.speed = -Math.abs(this.speed)
+function gamearea() {
+    this.canvas = document.createElement("canvas");
+    this.canvas.width = 320;
+    this.canvas.height = 180;    
+    document.getElementById("canvascontainer").appendChild(this.canvas);
+    this.context = this.canvas.getContext("2d");
+    this.pause = false;
+    this.frameNo = 0;
+    this.start = function() {
+        this.interval = setInterval(updateGameArea, 20);
     }
-    if (this.y < 0) {
-      this.speed = Math.abs(this.speed)
+    this.stop = function() {
+        clearInterval(this.interval);
+        this.pause = true;
     }
-  }
-}
-
-let player = new Player()
-let e1 = new Enemy(4)
-let e2 = new Enemy(8)
-let e3 = new Enemy(12)
-e1.x = 100
-e2.x = 233
-e3.x = 366
-
-function isCollided(box1, box2) {
-var myleft = box2.x;
-    var myright = box2.x + (box2.width);
-    var mytop = box2.y;
-    var mybottom = box2.y + (box2.height);
-    var otherleft = box1.x;
-    var otherright = box1.x + (box1.width);
-    var othertop = box1.y;
-    var otherbottom = box1.y + (box1.height);
-    var crash = true;
-    if ((mybottom < othertop) ||
-    (mytop > otherbottom) ||
-    (myright < otherleft) ||
-    (myleft > otherright)) {
-      crash = false;
+    this.clear = function(){
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
-    return crash;
-    
-    
 }
 
-
-function drawBox(box) {
-  context.fillStyle = box.color
-  context.fillRect(box.x, box.y, box.size, box.size)
+function component(width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+        ctx = myGameArea.context;
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
 }
 
-paintbox.addEventListener('mousedown', () => {
-  player.speed = playerSpeed
-})
-
-paintbox.addEventListener('mouseup', () => {
-  player.speed = 0
-})
-
-setInterval(() => {
-    playerSpeed =  5 + parseInt(Math.random() * 10)
-    player.y = 100 + (Math.random() * 300)
-}, 2000)
-
-function gameLoop() {
-  if (!gameOn) return  
-  console.log('frame update')
-  context.clearRect(0, 0, 500, 500)
-  e1.move()
-  e2.move()
-  e3.move()
-  player.move()
-
-  if (isCollided(e1, player) || isCollided(e2, player) || isCollided(e3, player)) {
-    gameOn = false  
-    window.alert('Game Over')
-  }
-
-  drawBox(player)
-  drawBox(e1)
-  drawBox(e2)
-  drawBox(e3)
-
-
-  window.requestAnimationFrame(gameLoop)
+function updateGameArea() {
+    var x, y, min, max, height, gap;
+    for (i = 0; i < myObstacles.length; i += 1) {
+        if (myGamePiece.crashWith(myObstacles[i])) {
+            myGameArea.stop();
+        } 
+    }
+    if (myGameArea.pause == false) {
+        myGameArea.clear();
+        myGameArea.frameNo += 1;
+        if (myGameArea.frameNo == 1 || everyinterval(100)) {
+            x = myGameArea.canvas.width;
+            y = myGameArea.canvas.height - 100;
+            min = 20;
+            max = 100;
+            height = Math.floor(Math.random()*(max-min+1)+min);
+            min = 50;
+            max = 100;
+            gap = Math.floor(Math.random()*(max-min+1)+min);
+            myObstacles.push(new component(10, height, "green", x, 0));
+            myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+        }
+        for (i = 0; i < myObstacles.length; i += 1) {
+            myObstacles[i].x += -1;
+            myObstacles[i].update();
+        }
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+    }
 }
 
-gameLoop()
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+
+function moveup(e) {
+    myGamePiece.speedY = -1; 
+}
+
+function movedown() {
+    myGamePiece.speedY = 1; 
+}
+
+function moveleft() {
+    myGamePiece.speedX = -1; 
+}
+
+function moveright() {
+    myGamePiece.speedX = 1; 
+}
+
+function clearmove(e) {
+    myGamePiece.speedX = 0; 
+    myGamePiece.speedY = 0; 
+}
+startGame();
