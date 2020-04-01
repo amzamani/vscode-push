@@ -54,7 +54,7 @@ e3.x = 366
 function isCollided(box1, box2) {
   console.log(box1.x)
   console.log(box2.x)
-if (box1.x == box2.x )return true;
+if ((box2.x+50) == box1.x )return true;
     // fill this yourself
     
 }
