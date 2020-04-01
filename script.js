@@ -52,7 +52,7 @@ e2.x = 233
 e3.x = 366
 
 function isCollided(box1, box2) {
- if(box1.x<=box2.x<=(box1.x + 50)){
+ if(box1.x<=(box2.x+50)<=(box1.x + 50)){
    if((box2.y<=(box1.y+50)<=(box2.y+50))||(box2.y<=box1.y<=(box2.y+50)))
       return true;}
     // fill this yourself
