@@ -52,12 +52,26 @@ e2.x = 233
 e3.x = 366
 
 function isCollided(box1, box2) {
- if(box1.x<=(box2.x+50)<=(box1.x + 50)){
-   if((box2.y<=(box1.y+50)<=(box2.y+50))||(box2.y<=box1.y<=(box2.y+50)))
-      return true;}
-    // fill this yourself
+var myleft = box2.x;
+    var myright = box2.x + (box2.width);
+    var mytop = box2.y;
+    var mybottom = box2.y + (box2.height);
+    var otherleft = box1.x;
+    var otherright = box1.x + (box1.width);
+    var othertop = box1.y;
+    var otherbottom = box1.y + (box1.height);
+    var crash = true;
+    if ((mybottom < othertop) ||
+    (mytop > otherbottom) ||
+    (myright < otherleft) ||
+    (myleft > otherright)) {
+      crash = false;
+    }
+    return crash;
+    
     
 }
+
 
 function drawBox(box) {
   context.fillStyle = box.color
