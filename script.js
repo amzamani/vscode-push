@@ -52,7 +52,7 @@ e2.x = 233
 e3.x = 366
 
 function isCollided(box1, box2) {
-
+if (box1.x == box2.x ) return true;
     // fill this yourself
     
 }
