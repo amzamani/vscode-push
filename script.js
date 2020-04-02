@@ -52,19 +52,19 @@ e2.x = 233
 e3.x = 366
 
 function isCollided(box1, box2) {
-var plleft = box2.x;
-    var plright = box2.x + (box2.size);
-    var pltop = box2.y;
-    var plbottom = box2.y + (box2.size);
-    var enleft = box1.x;
-    var enright = box1.x + (box1.size);
-    var entop = box1.y;
-    var enbottom = box1.y + (box1.size);
+var playerleft = box2.x;
+    var playerright = box2.x + (box2.size);
+    var playertop = box2.y;
+    var playerbottom = box2.y + (box2.size);
+    var enemyleft = box1.x;
+    var enemyright = box1.x + (box1.size);
+    var enemytop = box1.y;
+    var enemybottom = box1.y + (box1.size);
     var crash = true;
-    if ((plbottom < entop) ||
-    (pltop > enbottom) ||
-    (plright < enleft) ||
-    (plleft > enright)) {
+    if ((playerbottom < enemytop) ||
+    (playertop > enemybottom) ||
+    (playerright < enemyleft) ||
+    (playerleft > enemyright)) {
 
 
       crash = false;
