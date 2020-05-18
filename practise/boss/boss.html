@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>BOSS</title>
+    <link rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico' />
+    <link href="jquery-ui.min.css" rel="stylesheet">
+    <link href="semantic.min.css" rel="stylesheet">
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="jquery-ui/jquery-ui.min.js"></script>
+    <script src="semantic/semantic.js"></script>
+    <style>
+
+        .ui.top.fixed.huge.fluid.secondary.pointing.stackable.menu.red {
+            background-color: white;
+        }
+        .main.container {
+            margin-top: 6em;
+        }
+        .hamburger-container {
+            display: none !important;
+        }
+
+        .ui.secondary.pointing.menu {
+          padding-bottom: 10px;
+        }
+
+        .boss-link-container {
+          padding: 15px 0 0 15px !important;
+        }
+
+        .claims-active {
+            border-color: #fc4f4f !important;
+        }
+
+        #bounty-range-slider{
+            margin: 5px 10px 15px 10px;
+        }
+
+        .btn-container a{
+            padding: 10px;
+            background: #fc4f4f;
+            color: #fff;
+            display: block;
+        }
+
+        #gobounty input {
+            width:100px;
+        }
+
+        #gobounty{
+            text-align: center;
+            overflow: hidden;
+        } 
+
+        a.leaderboard-menu:not(.active) {
+          color: rgba(0,0,0,.87);
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu.fluid {
+                overflow: hidden;
+                height: 50px;
+                -webkit-transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
+                -moz-transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
+                -o-transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
+                transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
+            }
+            .menu .ui.grid {
+                width: 100%;
+            }
+
+            .header.item {
+                border-bottom: 1px solid rgba(0,0,0,0.2);
+                height: 50px !important;
+            }
+
+            .hamburger-container {
+                display: block !important;
+                width: 21%;
+                position: relative;
+                /* margin-top: -4.5%; */
+                margin-right: -8%;
+            }
+
+            .hamburger {
+                position: relative !important;
+                /* position: absolute;
+                top: 50%;
+                left: 100%;
+                -webkit-transform: translate(-50%,-50%);
+                -moz-transform: translate(-50%,-50%);
+                -o-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%); */
+            }
+
+            .separator {
+                height: 50px;
+                width: 1px;
+                background: rgba(0,0,0,0.2);
+                /* margin-top: -5%; */
+                vertical-align: top;
+            }
+
+            .boss-link-container {
+                padding: 3px 0 0 15px !important;
+                width: 85% !important;
+            }
+
+            .boss-link-container a {
+                width: 75%;
+            }
+
+            .boss-link {
+                display: block;
+                text-align: center;
+                margin-left: 5%;
+                /* margin-top: -4.5%; */
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var toggle = 0;
+            $(".hamburger-container").click(function() {
+                if (!toggle) {
+                    $(".menu.fluid").css({
+                        'height': '100%'
+                    });
+                    toggle = 1;
+                } else {
+                    $(".menu.fluid").css({
+                        'height': '50px'
+                    });
+                    toggle = 0;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="ui top fixed huge fluid secondary pointing stackable menu red">
+  <div class="item boss-link-container">
+    <a href="/">
+      <img height="38" class="boss-link" src="/images/bosslogo.png">
+    </a>
+    <div class="separator"></div>
+    <span class="column hamburger-container">
+                <center>
+                    <i class="bars icon hamburger"></i>
+                </center>
+            </span>
+  </div>
+  <div class="ui stackable container">
+    <div class="ui simple dropdown item">
+      <i class="checked calendar icon"></i>
+        <a class="leaderboard-menu active" href="/leaderboard/">Leaderboard</a>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item active" href="/leaderboard/2020">2020</a>
+        <a class="item false" href="/leaderboard/2019">2019</a>
+      </div>
+    </div>
+
+    <div class="ui simple dropdown item ">
+      <i class="checked calendar icon"></i>
+      Claim
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item " href="/claims/view">View</a>
+      </div>
+    </div>
+    <a class="item " href="/stats">
+      <i class="chart line icon"></i>
+      Stats
+    </a>
+    <a class="item" href="http://lab.codingblocks.com/boss" target="_blank" >
+      <i class="info icon"></i>
+      Information
+    </a>
+    <a class="item" href="https://github.com/issues?utf8=%E2%9C%93&q=is%3Aopen+is%3Aissue+archived%3Afalse+label%3Aboss+org%3Acoding-blocks+org%3Ajagql+org%3Ahereisnaman" target="_blank" >
+      <i class="github icon"></i>
+      Open Issues
+    </a>
+    <a class="item" href="https://gitter.im/coding-blocks/boss-2019-lobby" target="_blank" >
+      <i class="gitter icon"></i> Gitter
+    </a>
+  </div>
+    <a class="right item" href="/login">Login</a>
+
+</div>
+
+
+<div class="ui main container">
+    <table class="ui celled padded table red unstackable">
+    <thead>
+    <tr>
+        <th>Github User</th>
+        <th>Points</th>
+        <th>PRs Submitted</th>
+    </tr>
+    </thead>
+        <tr>
+            <td class="red text center aligned">
+                <b class="ui "><a class="red text" href="https://github.com/championswimmer">championswimmer</b>
+            </td>
+            <td>
+                <div class="right aligned">100</div>
+            </td>
+            <td>
+                <div class="right aligned">1</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="red text center aligned">
+                <b class="ui "><a class="red text" href="https://github.com/prathamk22">prathamk22</b>
+            </td>
+            <td>
+                <div class="right aligned">20</div>
+            </td>
+            <td>
+                <div class="right aligned">8</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="red text center aligned">
+                <b class="ui "><a class="red text" href="https://github.com/adiig7">adiig7</b>
+            </td>
+            <td>
+                <div class="right aligned">0</div>
+            </td>
+            <td>
+                <div class="right aligned">6</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="red text center aligned">
+                <b class="ui "><a class="red text" href="https://github.com/samagragupta">samagragupta</b>
+            </td>
+            <td>
+                <div class="right aligned">0</div>
+            </td>
+            <td>
+                <div class="right aligned">5</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="red text center aligned">
+                <b class="ui "><a class="red text" href="https://github.com/HaripriyaB">HaripriyaB</b>
+            </td>
+            <td>
+                <div class="right aligned">0</div>
+            </td>
+            <td>
+                <div class="right aligned">5</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="red text center aligned">
+                <b class="ui "><a class="red text" href="https://github.com/Niteshrocks">Niteshrocks</b>
+            </td>
+            <td>
+                <div class="right aligned">0</div>
+            </td>
+            <td>
+                <div class="right aligned">3</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="red text center aligned">
+                <b class="ui "><a class="red text" href="https://github.com/mnb27">mnb27</b>
+            </td>
+            <td>
+                <div class="right aligned">0</div>
+            </td>
+            <td>
+                <div class="right aligned">3</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="red text center aligned">
+                <b class="ui "><a class="red text" href="https://github.com/hardik0899">hardik0899</b>
+            </td>
+            <td>
+                <div class="right aligned">0</div>
+            </td>
+            <td>
+                <div class="right aligned">3</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="red text center aligned">
+                <b class="ui "><a class="red text" href="https://github.com/shivamgohri">shivamgohri</b>
+            </td>
+            <td>
+                <div class="right aligned">0</div>
+            </td>
+            <td>
+                <div class="right aligned">2</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="red text center aligned">
+                <b class="ui "><a class="red text" href="https://github.com/NitishGadangi">NitishGadangi</b>
+            </td>
+            <td>
+                <div class="right aligned">0</div>
+            </td>
+            <td>
+                <div class="right aligned">2</div>
+            </td>
+        </tr>
+</table>
+
+<div class="ui pagination menu">
+                    <a class="item disabled"> Prev</a>
+
+                    <a class="item   active   "  href="?page&#x3D;1&amp;size&#x3D;10" >
+                        1
+                    </a>
+                    <a class="item   "  href="?page&#x3D;2&amp;size&#x3D;10" >
+                        2
+                    </a>
+                    <a class="item" href="?page=2&size=10" >Next </a>
+            </div>
+
+<style>
+    .red.text {
+        color: red;
+    }
+</style>
+
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-83327907-10"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-83327907-10');
+</script>
+
+
+</body>
+</html>

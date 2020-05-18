@@ -1,0 +1,64 @@
+h1{
+    letter-spacing: 5px;
+}
+.mail{
+    display: flex;
+    justify-content: flex-end;
+  
+
+}
+body{
+    
+    padding-left: 100px;
+    padding-right: 100px;
+    margin: 100px;
+    color: #04143A;
+  background: linear-gradient(to right, #25c481, #25b7c4);
+  font-size: large;
+  letter-spacing: 1px;
+  font-style: italic;
+}
+table {
+    border: 25px;
+    
+    padding: 20px;
+	border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 10px;
+    
+    
+   
+}
+h2{
+    width: 47.9%;
+	height: 25px;
+	background-color: linear-gradient(to right, #25c481, #25b7c4) ;
+	display: inline-block;
+    border: #04143A;
+    border-style: groove;
+    border-color: #fff;
+    font-style: normal;
+
+	border-radius: 10px;
+	text-align: center;
+	padding: 10px;
+    transition: 0.5s;
+    padding-bottom: 5px;
+}
+h2:hover{
+    transform: scale(1.05);
+    background-color: #fff;
+    box-shadow: 0px 5px 50px -8px #ddd;
+    cursor: grab;
+}
+hr{
+        color: blue;
+}
+h1{
+    color: #2c2c2c;
+    
+    letter-spacing: .05em;
+    text-shadow: 
+      2px 2px 2px #d5d5d5, 
+      3px 3px 0px rgba(0, 0, 0, 0.2);
+}

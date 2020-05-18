@@ -1,0 +1,90 @@
+:root {
+    --speed: 0;
+    --stop: "";
+    --ht:250px
+    --x : -200px;
+    --y : 200px;
+}
+.machine {
+    background-color:goldenrod;
+    border: solid burlywood 3px;
+    height: 300px;
+    width: 900px;
+    margin: 100px;
+    border-radius: 50px;
+    box-shadow: peru -10px 10px 5px;
+    z-index: 5;
+
+
+    display: flex
+}
+
+#inpSpeed {
+    font-size: 30pt;
+    margin-left: 30px;
+    width: 70px;
+}
+
+.slot {
+    
+    padding: -10px;
+    width: 250px;
+    margin: 20px;
+    margin-left: 25px;
+    
+    overflow: hidden;
+
+    z-index: 1;
+
+    background-color: beige;
+    border: outset burlywood 2px;
+    text-align: center;
+    font-size: 100pt;
+    line-height: 300px;
+    border-radius: 50px;
+    
+
+}
+
+.slot > .value {
+    z-index: 3;
+    animation-name: slotspin;
+    animation-iteration-count: infinite;
+    animation-duration: calc(1s / var(--speed));
+    animation-play-state: var(--stop);
+    
+    
+}
+
+@keyframes slotspin {
+    0% {
+        transform: translateY(-200px);
+    }
+    100% {
+        transform: translateY(200px)
+    }
+    
+}
+body{
+background: #D1913C;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FFD194, #D1913C);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FFD194, #D1913C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.shufflebtn , .stopbtn{
+
+    font-size: 50px;
+    font-style: italic;
+    background-color: chocolate;
+    border: groove outset;
+    border-radius: 20px;
+    box-shadow: 0 5px #666;
+
+    box-shadow: peru -10px 10px 5px;
+    
+}
+.shufflebtn:active , .stopbtn:active{
+    
+   
+    transform: translate(-5px, 5px);
+    box-shadow: 0 0px #666;
+  }
