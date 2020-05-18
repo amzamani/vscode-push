@@ -1,0 +1,38 @@
+body {
+    
+    width:   250px;
+}
+
+
+
+ul li {
+    border: solid black 3px;
+    background-color: rgb(101, 109, 231);
+    
+   padding-left: 10px;
+   transition: 1s;
+   color: turquoise;
+   
+    
+}
+
+
+
+ul li ul {
+    display: none;
+
+}
+
+
+ul li:hover > ul {
+    
+    transform: translateX(100px);
+
+    
+    display:    block;
+
+}
+
+ul ul li {
+    width:    250px;
+}
